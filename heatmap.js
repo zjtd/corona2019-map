@@ -112,7 +112,7 @@ const dom = document.getElementById("timebox");
     const dates = [];
     const now = new Date();
     now.setDate(-98);
-    for (var i = 0; i < 103; i++) {
+    for (var i = 0; i < 104; i++) {
         const str = `${now.getFullYear()}/${now.getMonth() + 1}/${now.getDate()}`;
         dates.push(str);
         now.setDate(now.getDate() + 1);
