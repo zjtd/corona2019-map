@@ -1,3 +1,20 @@
+var obj1;
+var obj2;
+var list = [];
+var list2 = [];
+var toObj = Object()
+
+var xmlhttp=new XMLHttpRequest();
+xmlhttp.open("get","city.geojson",true)
+// xmlhttp.responseType = "geojson"
+xmlhttp.send(null);
+xmlhttp.onload = function(){
+    if(xmlhttp.status ==200){
+         obj1 =JSON.parse(xmlhttp.responseText);
+         obj2 = obj1.features;
+         console.log(obj1);
+    }
+}
 mapboxgl.accessToken = 'pk.eyJ1Ijoiemh1d2VubG9uZyIsImEiOiJjazdhNGF6dzIwd3V0M21zNHU1ejZ1a3Q4In0.VkUeaPhu-uMepNBOMc_UdA';
     map = new mapboxgl.Map({
     container: 'map',
@@ -33,7 +50,7 @@ map.on('load', function () {
                 'heatmap-weight': [
                     'interpolate',
                     ['linear'],
-                    ['get', 'confirmedCount'],
+                    ['get', 'currentConfirmedCount'],
                     0, 0,
                     1000, 1
                 ],
@@ -88,15 +105,6 @@ map.on('load', function () {
     );  
 });
 
-function passsource(sourcename, filename1 = toObj) {
-
-    map.addSource(sourcename, {
-        'type': 'geojson',
-        'data': filename1,
-        
-    });
-
-};
 function timeplay(){
 const dom = document.getElementById("timebox");
     // 创建数据 
@@ -118,16 +126,24 @@ const dom = document.getElementById("timebox");
     });};
 timeplay()
 
-var obj1;
-var obj2;
-var list = [];
-var list2 = [];
-var toObj = Object()
-function jieshou(objjson){
-    obj1 = objjson;
-    obj2 = obj1.features;
+function passsource(sourcename, filename1 = toObj) {
+
+    map.addSource(sourcename, {
+        'type': 'geojson',
+        'data': filename1,
+        
+    });
+
+};
+
+
+
+console.log(xmlhttp.responseText)
+// function jieshou(objjson){
+     ;
+     
     
-}
+// }
 const test = (index,value) =>{     
     function changeresponse(var1) {
         list = [];
@@ -250,34 +266,7 @@ const test = (index,value) =>{
             
         }
     });
-    
-    
-    
 };
 tp.on("change",test);
 
-// var myChart = echarts.init(document.getElementById('main'));
-
-//         // 指定图表的配置项和数据
-//         var option = {
-//             title: {
-//                 text: 'ECharts 入门示例'
-//             },
-//             tooltip: {},
-//             legend: {
-//                 data:['销量']
-//             },
-//             xAxis: {
-//                 data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
-//             },
-//             yAxis: {},
-//             series: [{
-//                 name: '销量',
-//                 type: 'bar',
-//                 data: [5, 20, 36, 10, 10, 20]
-//             }]
-//         };
-
-//         // 使用刚指定的配置项和数据显示图表。
-//         myChart.setOption(option);
 
