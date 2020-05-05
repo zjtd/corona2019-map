@@ -5,7 +5,8 @@ var list2 = [];
 var toObj = Object()
 
 var xmlhttp=new XMLHttpRequest();
-xmlhttp.open("get","city.geojson",true)
+var url = "https://cdn.jsdelivr.net/gh/zjtd/corona2019-map@v0.0.1/city.geojson"
+xmlhttp.open("get",url,true)
 // xmlhttp.responseType = "geojson"
 xmlhttp.send(null);
 xmlhttp.onload = function(){
