@@ -3,20 +3,21 @@ var obj2;
 var list = [];
 var list2 = [];
 var toObj = Object()
+obj2 = api.features;
+// var xmlhttp=new XMLHttpRequest();
+// var url = "./city.geojson"
+// xmlhttp.open("get",url,true)
+// // xmlhttp.responseType = "geojson"
+// xmlhttp.send(null);
 
-var xmlhttp=new XMLHttpRequest();
-// var url = "https://cdn.jsdelivr.net/gh/zjtd/corona2019-map@v0.0.1/city.geojson"
-var url = './city.geojson'
-xmlhttp.open("get",url,true)
-// xmlhttp.responseType = "geojson"
-xmlhttp.send(null);
-xmlhttp.onload = function(){
-    if(xmlhttp.status ==200){
-         obj1 =JSON.parse(xmlhttp.responseText);
-         obj2 = obj1.features;
-         console.log(obj2);
-    }
-}
+// xmlhttp.onload = function(){
+//     if(xmlhttp.status ==200){
+//          obj1 =JSON.parse(xmlhttp.responseText);
+//          
+//          console.log(obj1);
+//     }
+// }
+
 mapboxgl.accessToken = 'pk.eyJ1Ijoiemh1d2VubG9uZyIsImEiOiJjazdhNGF6dzIwd3V0M21zNHU1ejZ1a3Q4In0.VkUeaPhu-uMepNBOMc_UdA';
 map = new mapboxgl.Map({
     container: 'map',
@@ -109,7 +110,7 @@ const dom = document.getElementById("timebox");
 
     const dates = [];
     const now = new Date();
-    now.setDate(-98);
+    now.setDate(-97);
     for (var i = 0; i < 104; i++) {
         const str = `${now.getFullYear()}/${now.getMonth() + 1}/${now.getDate()}`;
         dates.push(str);
@@ -135,8 +136,9 @@ function passsource(sourcename, filename1 = toObj) {
 };
 
 const test = (index,value) =>{  
-       
+    
     function changeresponse(var1) {
+        list = [];
         toObj.type = "FeatureCollection";
         for (i = 0; i < obj2.length; i++) {
              // var obj3 = obj2;
