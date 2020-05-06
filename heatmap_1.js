@@ -5,7 +5,8 @@ var list2 = [];
 var toObj = Object()
 
 var xmlhttp=new XMLHttpRequest();
-var url = "https://cdn.jsdelivr.net/gh/zjtd/corona2019-map@v0.0.2/city.geojson"
+// var url = "https://cdn.jsdelivr.net/gh/zjtd/corona2019-map@v0.0.1/city.geojson"
+var url = './city.geojson'
 xmlhttp.open("get",url,true)
 // xmlhttp.responseType = "geojson"
 xmlhttp.send(null);
@@ -13,11 +14,11 @@ xmlhttp.onload = function(){
     if(xmlhttp.status ==200){
          obj1 =JSON.parse(xmlhttp.responseText);
          obj2 = obj1.features;
-         console.log(obj1);
+         console.log(obj2);
     }
 }
 mapboxgl.accessToken = 'pk.eyJ1Ijoiemh1d2VubG9uZyIsImEiOiJjazdhNGF6dzIwd3V0M21zNHU1ejZ1a3Q4In0.VkUeaPhu-uMepNBOMc_UdA';
-    map = new mapboxgl.Map({
+map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/dark-v10', // stylesheet location
     center: [11.98, 32.85],
@@ -26,17 +27,13 @@ mapboxgl.accessToken = 'pk.eyJ1Ijoiemh1d2VubG9uZyIsImEiOiJjazdhNGF6dzIwd3V0M21zN
     zoom: 1.87,
     hash: true,
     maxzoom: 9,
-    
 });
 map.on('load', function () {
     function passsource(sourcename, filename1) {
-
         map.addSource(sourcename, {
             'type': 'geojson',
-            'data': filename1,
-            
+            'data': filename1,     
         });
-
     }  
     passsource('coronavirus', 'cityNew.geojson');  
     map.addLayer(
@@ -137,40 +134,26 @@ function passsource(sourcename, filename1 = toObj) {
 
 };
 
-
-
-console.log(xmlhttp.responseText)
-// function jieshou(objjson){
-     ;
-     
-    
-// }
-const test = (index,value) =>{     
+const test = (index,value) =>{  
+       
     function changeresponse(var1) {
-        list = [];
-        
         toObj.type = "FeatureCollection";
         for (i = 0; i < obj2.length; i++) {
              // var obj3 = obj2;
             var array1 = obj2[i];
-            
-            if (array1.properties.updateTime == var1+" ") {
+            if (array1.properties.uT == var1) {
                 array1.type = "Feature";
                 list.push(array1);
                 list2.push(array1.properties)
                 };
             };
-            toObj.features = list;
-            
     };
-    
     changeresponse(value);
     toObj.features = list;
     map.removeLayer('coronavirus-heat');
     map.removeSource('coronavirus') 
     passsource('coronavirus', toObj);
     var tableData = toObj.features;
-    
     map.addLayer(
         {
             'id': 'coronavirus-heat',
@@ -183,7 +166,7 @@ const test = (index,value) =>{
                 'heatmap-weight': [
                     'interpolate',
                     ['linear'],
-                    ['get', 'confirmedCount'],
+                    ['get', 'coC'],
                     0, 0,
                     1000, 1
                 ],
@@ -236,16 +219,13 @@ const test = (index,value) =>{
         },
         'waterway-label'
     );
+    
     var app1 = new Vue({
         el: '#rTable',
         data: {
             message:'国内分城市疫情信息',
             orderBy:["provinceName", "cityName","confirmedCount","curedCount","deadCount"],
-            tableTh:{
-                provinceName:{
-                    title:"省份",
-                    align:"left"
-                },
+            tableTh:{  
                 cityName:{
                     title:"城市",
                     align:"left"
@@ -262,12 +242,21 @@ const test = (index,value) =>{
                     title:"死亡数(人)",
                     align:"right"
                 },
+                suspectedCount:{
+                    title:"疑似",
+                    align:"right"
+                },
+                updateTime:{
+                    title:"日期",
+                    align:"right"
+                }
             },
             dataList:list2,
             
         }
     });
 };
+
 tp.on("change",test);
 
 

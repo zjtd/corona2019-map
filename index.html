@@ -4,13 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>html study</title>
+    <title>疫情图</title>
    
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mapbox-gl@1.10.0/src/css/mapbox-gl.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zjtd/corona2019-map@v0.0.1/webcss.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zjtd/corona2019-map@v0.0.2/webcss.css">
     <script src="https://cdn.jsdelivr.net/npm/mapbox-gl@1.10.0/dist/mapbox-gl.min.js"></script>
-    <script src='https://cdn.jsdelivr.net/gh/zjtd/corona2019-map@v0.0.1/TimePlayer.js'></script>
+    <script src='https://cdn.jsdelivr.net/gh/zjtd/corona2019-map@v0.0.2/TimePlayer.js'></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/echarts@4.7.0/dist/echarts.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 </head>
@@ -24,7 +24,7 @@
         {{message}}
         <table>
             <tr>
-                <th>序号</th>
+                <th>省份</th>
                 <th v-for = "th in tableTh">
                     {{th.title}}
                 </th>
@@ -41,7 +41,8 @@
 
 
     <!-- <script src="demo.js"></script> -->
-    <script src="https://cdn.jsdelivr.net/gh/zjtd/corona2019-map@v0.0.1/heatmap.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/zjtd/corona2019-map@v0.0.2/heatmap.js"></script>
+    
     <!-- <script type="text/javascript" src="city.json?callback=demo"></script> -->
 </body>
 
