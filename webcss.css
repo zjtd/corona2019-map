@@ -1,24 +1,363 @@
 body{margin:0;background-color: rgba(105,105,105,0.3);}
 
 #map {position:absolute;width:100%;height:100%;}
-
-#timebox {
-        position:  absolute;
-        width:24%;
-        margin-right: 5%;
-        margin-left:75%;
-        margin-top:5%;
-        background-color: rgba(105,105,105,0.3);
+#webTitle{
+    text-shadow: 1px 1px 2px rgba(0,0,0,.8);
+    color: #fff;
+    font-size: 38px;
+    position: absolute;
+    left: 40px;
+    top: 55px;
+}
+#dataPanel{
+    position: absolute;
+    left: 40px;
+    top: 120px;
+    margin:0 ;
+    padding:0;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    border: 1px solid #7a7e84;
+}
+.panel{
+        float:left;
+        min-width: 130px;
+        position: relative;
+        border-right:3px solid rgba(7, 5, 5, 0.342);
+        border-radius: 5px;
+}
+#sumConfirmed{
+        text-shadow: 1px 1px 2px rgba(0,0,0,.8);
+        font-size: 1.2em;
+        color:white;
+}
+#sumConfirmed div{
+        font-size: 30px;
+    margin: 5px 0;
+    color: #f99;
+    font-family: Orbitron;
+    text-align:center;
+}
+#sumConfirmed p{
+        margin: 5px 5px 0 0;
+        background-color: rgba(253, 80, 80, 0.315);
+        border-left:9px solid rgba(196, 30, 19, 0.568);}
+        
+#sumCured{text-shadow: 1px 1px 2px rgba(0,0,0,.8);
+        font-size: 1.2em;
+        color:white;}
+#sumCured div{font-size: 30px;
+                margin: 5px 0;
+                color: rgb(37, 189, 17);
+                font-family: Orbitron;
+                text-align:center;}
+#sumCured p{
+                margin: 5px 5px 0 0;
+        background-color: rgba(37, 189, 17, 0.315);
+        border-left:9px solid rgba(37, 189, 17, 0.568);
         }
+#sumDead{text-shadow: 1px 1px 2px rgba(0,0,0,.8);
+        font-size: 1.2em;
+        color:white;}
+        #sumDead div{font-size: 30px;
+                margin: 5px 0;
+                color: white;
+                font-family: Orbitron;
+                text-align:center;}
+        #sumDead p{margin: 5px 5px 0 0;
+                background-color: rgba(88, 90, 88, 0.315);
+                border-left:9px solid rgba(88, 90, 88, 0.568);}
+
+#dataPanelEchart1{
+        position: absolute;
+    left: 40px;
+    top: 230px;
+    margin:0;
+    padding:0;
+    background: rgba(0, 0, 0, 0.637);
+    height:340px;
+    border-radius: 5px;
+    border: 1px solid #7a7e84;
+    width:514px;
+    
+}
+#dataPanelEchart2{
+    position: absolute;
+    left: 40px;
+    top: 590px;
+    margin:0 ;
+    padding:0;
+    background: rgba(0, 0, 0, 0.637);
+    height:340px;
+    border-radius: 5px;
+    border: 1px solid #7a7e84;
+    width:514px;
+}
+#timebox {
+        position:fixed;
+        width:450px;
+        right: 2%;
+        margin-left:67%;
+        top:6em;
+        background-color: rgba(105,105,105,0.4);
+        border: 1px solid #7a7e84;
+        }
+#container{
+        border: 1px solid #7a7e84;
+        transform:scale(1);
+        position:fixed;
+        width:450px;
+        right: 2%;
+        margin-left:67%;
+        top:12em;
+        background-color: rgba(105,105,105,0.2);
+        height:40em;
+        color: white;
+        border-radius: 5px;
+}#container:after{
+        content: "";
+        width:100%;
+        height:100%;
+        position: absolute;
+        left:0;
+        top:0;
+        background: inherit;
+        filter: blur(4px);/*为了模糊更明显，调高模糊度*/
+        z-index: -2;
+}
+#tbhead{
+        display:block;
+        word-spacing:nowrap;
+        text-shadow: 1px 1px 2px rgba(0,0,0,.8);
+        position: relative;
+        font-size: 15px;
+        background-color: rgba(26, 78, 221, 0.568);
+        border-left:5px solid rgba(56, 107, 245, 0.568);
+        margin:3px 10px 0 8px;
+        width:95.5%;
+        height:5%;
+        top:0.2em;
+        
+        } 
+#tbP{
+        margin-block-start: 0.5em;
+        margin-block-end: 0.5em;
+}
 #tableBox{
+        position:relative;
+        top:3%;
+        width:100%;
+        background: transparent;
+        height:100%;
+        }
+
+#tableLogo{
+        zoom:0.6;
+        margin-right:10px;
+        margin-top:3px;
+        padding-top:3px;
+}
+#rTable{
+        text-align:center;
+        text-shadow: 1px 1px 2px rgba(0,0,0,.8);
+        font-size: 12px;
+        position: absolute; overflow: hidden; 
+        /* background-color: rgba(105,105,105,0.3); */
+        width:420px;
+        height:550px;
+        overflow: auto;
+        font-size:1em;
+        margin-left:5%
+}
+.scrollbar{
+        position:relative;
+        width: 5px;
+        height: 90%;
+        margin: 0 auto;
+}
+#rTable::-webkit-scrollbar {/*滚动条整体样式*/
+        width: 10px;     /*高宽分别对应横竖滚动条的尺寸*/
+        height: 1px;
+}
+#rTable::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+        background: rgba(0,0,0,0.8);
+}
+#rTable::-webkit-scrollbar-track {/*滚动条里面轨道*/
+        -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.8);
+        border-radius: 10px;
+        background:#535353;
+}
+tr{     
+        
+        width:410px;
+}
+th{     
+        table-layout:fixed;
+       
+        margin:0px;
+        width:50px;
+        font-size:1em;
+        text-align:center;
+        padding:0;
+}
+td{
+        table-layout: fixed;
+        font-size:0.7em;
+        text-align:center;
+        width:50px;
+}
+#tableMessage{
         position:absolute;
         width:400px;
-        height:800px;
+        top:35%;
+        font-size:30px;
+}
+#introduction{
+        position:fixed;
+        width:450px;
+        right:2%;
+        margin-left:67%;
+        top:53em;
+        background-color: rgba(0,0,0,0.3);
+        height:82px;
+        color: white;
+        border-radius: 5px;
+        border: 1px solid #7a7e84;
+}
+@media screen and (max-width: 1024px) {
+        #map {position:absolute;top:25em;width:100%;height:28em;}
+        #webTitle{line-height: 80px;text-align:center;height:80px;padding:0;margin:0;left:0;top:0;background-color: rgba(8, 8, 8, 0.644);width:100%;text-shadow: 1px 1px 2px rgba(0,0,0,.8);color: #fff;font-size: 32px;position: absolute;}
+        #webTitle span{text-align:center;display:block;}
+        #timebox {display:block;position:absolute;width:100%;right:0%;margin-left:0%;top:5em;background-color: rgba(8, 8, 8, 0.644);border: 1px solid #7a7e84;float:top;}
+        #dataPanel{position: relative;left: 0px;top: 9em;width:100%;margin:0 ;padding:0;background: rgba(0, 0, 0, 0.5);border-radius: 5px;
+                border: 1px solid #7a7e84;}
+        .panel{
+                float:left;
+                width: 100%;
+                position: relative;
+                border-right:3px solid rgba(7, 5, 5, 0.342);
+                border-radius: 5px;
+                background-color: rgba(8, 8, 8, 0.644)
         }
-#rTable{
-        color: honeydew;
-        font-size:15px;
-        padding:10px;
-        position: relative; overflow: hidden; width: 30%; height: 40%;
-        background-color: rgba(105,105,105,0.3);
+        #sumConfirmed{
+                text-shadow: 1px 1px 2px rgba(0,0,0,.8);
+                font-size: 1.1em;
+                color:white;
+        }
+        #sumConfirmed div{
+                font-size: 15px;
+            margin:  0;
+            color: #f99;
+            font-family:'Orbitron';
+            text-align:center;
+        }
+        #sumConfirmed p{
+                margin: 5px 5px 0 0;
+                background-color: rgba(253, 80, 80, 0.315);
+                border-left:9px solid rgba(196, 30, 19, 0.568);};
+                
+        #sumCured{text-shadow: 1px 1px 2px rgba(0,0,0,.8);
+                font-size: 1.1em;
+                color:white;}
+        #sumCured div{font-size: 15px;
+                        margin: 0;
+                        color: rgb(37, 189, 17);
+                        font-family:'Orbitron';
+                        text-align:center;};
+        #sumCured p{
+                        margin: 5px 5px 0 0;
+                background-color: rgba(37, 189, 17, 0.315);
+                border-left:9px solid rgba(37, 189, 17, 0.568);
+                }
+        #sumDead{text-shadow: 1px 1px 2px rgba(0,0,0,.8);
+                font-size: 1.1em;
+                color:white;}
+
+        #sumDead div{
+                font-size: 15px;
+                margin: 5px 0;
+                color: white;
+                font-family:'Orbitron';
+                text-align:center;}
+                #sumDead p{margin: 5px 5px 0 0;
+                        background-color: rgba(26, 27, 26, 0.315);
+                        border-left:9px solid rgba(26, 27, 26, 0.568);}
+        #container{
+                border: 1px solid #7a7e84;
+                position:absolute;
+                width:100%;
+                right:0%;
+                margin-left:0%;
+                top:39.65em;
+                background-color: rgba(8, 8, 8, 0.644);
+                height:23em;
+                color: white;
+                border-radius: 5px;
+        }
+        #dataPanelEchart1{
+            position: absolute;
+            left: 0px;
+            top: 62.7em;
+            margin:0;
+            padding:0;
+            background: rgba(0, 0, 0, 0.637);
+            height:340px;
+            border-radius: 5px;
+            border: 1px solid #7a7e84;
+            width:100%;  
+        }
+        #dataPanelEchart2{
+            position: absolute;
+            left: 0px;
+            top: 84em;
+            margin:0 ;
+            padding:0;
+            background: rgba(0, 0, 0, 0.637);
+            height:340px;
+            border-radius: 5px;
+            border: 1px solid #7a7e84;
+            width:100%;
+        }
+        #rTable{
+                text-align:center;
+                text-shadow: 1px 1px 2px rgba(0,0,0,.8);
+                font-size: 12px;
+                position: absolute; overflow: hidden; 
+                width:97%;
+                height:20em;
+                overflow: auto;
+                font-size:1em;
+        }
+        #tableBox{
+                position:relative;
+                top:4%;
+                width:98%;
+                background: transparent;
+                height:auto;
+                }
+        #tableLogo{
+                zoom:0.6;
+                margin-right:10px;
+                margin-top:0px;
+                padding-top:0px;
+                }
+        #tableID{
+                width:97%;
+        }
+        #introduction{
+                position:fixed;
+                width:450px;
+                right:2%;
+                margin-left:67%;
+                top:53em;
+                background-color: rgba(0,0,0,0.3);
+                height:82px;
+                color: white;
+                border-radius: 5px;
+                border: 1px solid #7a7e84;
+                display:none;
+        }
+
 }
