@@ -19,18 +19,17 @@ map.addControl(new MapboxLanguage({
   defaultLanguage: 'zh'
 }));
 map.on('load', function () {
-    
-    function passsource(sourcename, filename1) {
-        map.addSource(sourcename, {
-            'type': 'geojson',
-            'data': filename1,     
-            'cluster':true,
-            clusterRadius:50,
-            clusterProperties:{'cCC':["+",["get","cCC"]]}
-        });
-    }  
-    passsource('coronavirus', 'cityNew.geojson');
-    
+    map.addSource('coronavirus', {
+        'type': 'geojson',
+        'data': 'cityNew.geojson',
+    });
+    map.addSource('coronavirus1', {
+        'type': 'geojson',
+        'data': 'cityNew.geojson',     
+        'cluster':true,
+        clusterRadius:50,
+        clusterProperties:{'cCC':["+",["get","cCC"]]}
+    });
     map.addLayer(
         {
             'id': 'coronavirus-heat',
@@ -101,8 +100,8 @@ map.on('load', function () {
         {
             id: 'clusters-layer',
             type: 'circle',
-            source: 'coronavirus',
-            'minzoom':6.99,
+            source: 'coronavirus1',
+            'minzoom':6.909,
             filter: ['>=', ['get', 'cCC'], 1],
             paint: {
                 'circle-radius': [
@@ -131,8 +130,8 @@ map.on('load', function () {
     map.addLayer({
         id: 'clusters-count',
         type: 'symbol',
-        'minzoom':6.99,
-        source: 'coronavirus',
+        'minzoom':6.909,
+        source: 'coronavirus1',
         filter: ['>=', ['get', 'cCC'], 1],
         layout: {
             'text-field': '{cCC}',
@@ -312,18 +311,31 @@ const test = (index,value) =>{
         var dLL = app1.dataList.length;
         app1.dataList.splice(0,dLL);
         map.removeLayer('coronavirus-heat');
-        map.removeSource('coronavirus') 
+        map.removeLayer('clusters-layer');
+        map.removeLayer('clusters-count');
+        map.removeSource('coronavirus');
+        map.removeSource('coronavirus1')
         toObj.features = list;
         for(i=0;i<list2.length;i++){ 
             Vue.set(app1.dataList,i,list2[i])
         };
-        passsource('coronavirus', toObj);
+        map.addSource('coronavirus', {
+            'type': 'geojson',
+            'data': toObj,
+        });
+        map.addSource('coronavirus1', {
+            'type': 'geojson',
+            'data': toObj,     
+            'cluster':true,
+            clusterRadius:50,
+            clusterProperties:{'cCC':["+",["get","cCC"]]}
+        });
         map.addLayer(
             {
             'id': 'coronavirus-heat',
             'type': 'heatmap',
             'source': 'coronavirus',
-            'maxzoom': 10,
+            'maxzoom': 6.9,
             'paint': {
                 // 热力权重，适用于集合图
                 // Mapbox Expression https://docs.mapbox.com/mapbox-gl-js/style-spec/expressions/
@@ -383,6 +395,52 @@ const test = (index,value) =>{
             },
             'waterway-label'
         );
+        map.addLayer(
+            {
+                id: 'clusters-layer',
+                type: 'circle',
+                source: 'coronavirus1',
+                'minzoom':6.909,
+                filter: ['>=', ['get', 'cCC'], 1],
+                paint: {
+                    'circle-radius': [
+                        'step',
+                        ['get', 'cCC'],
+                        10, 10,
+                        20, 1000,
+                        30, 5000,
+                        40
+                    ],
+                    'circle-color': [
+                        'step',
+                        ['get', 'cCC'],
+                        '#9ad5ff', 10,
+                        '#9af6ff', 1000,
+                        'cyan', 2000,
+                        '#f1f075'
+                    ],
+                    'circle-translate':[-25,-25],
+                },
+    
+            },
+            'waterway-label'
+        );
+    
+        map.addLayer({
+            id: 'clusters-count',
+            type: 'symbol',
+            'minzoom':6.909,
+            source: 'coronavirus1',
+            filter: ['>=', ['get', 'cCC'], 1],
+            layout: {
+                'text-field': '{cCC}',
+                'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
+                'text-size':32,
+                'text-allow-overlap': true,
+                'text-offset':[-0.8,-0.8]
+                
+            }
+        }, 'waterway-label');
     };
     if(list2.length>0){
         if(tablemessage){

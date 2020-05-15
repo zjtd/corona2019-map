@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
     <title>疫情图</title>
-    <script src="https://cdn.jsdelivr.net/gh/zjtd/corona2019-map@v0.0.6/data/data.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/zjtd/corona2019-map@v0.0.6/data/Chinadata.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/zjtd/corona2019-map@v0.0.6/data/foreign.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/zjtd/corona2019-map@v0.0.7/data/data.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/zjtd/corona2019-map@v0.0.7/data/Chinadata.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/zjtd/corona2019-map@v0.0.7/data/foreign.js"></script>
     <script src='https://cdn.jsdelivr.net/npm/@mapbox/mapbox-gl-language@0.10.1/index.js'></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mapbox-gl@1.10.0/src/css/mapbox-gl.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zjtd/corona2019-map@v0.0.4/webcss.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zjtd/corona2019-map@v0.0.7/webcss.css">
     <script src="https://cdn.jsdelivr.net/npm/mapbox-gl@1.10.0/dist/mapbox-gl.min.js"></script>
-    <script src='https://cdn.jsdelivr.net/gh/zjtd/corona2019-map@v0.0.6/TimePlayer.js'></script>
+    <script src='https://cdn.jsdelivr.net/gh/zjtd/corona2019-map@v0.0.7/TimePlayer.js'></script>
     <script src="https://cdn.jsdelivr.net/npm/echarts@4.7.0/dist/echarts.min.js"></script>
     
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
@@ -29,11 +29,11 @@
             <div>{{sumC1}}</div>
         </div>
         <div id= "sumCured" class = "panel">
-            <p>新增地区累计治愈数</p>    
+            <p>累计治愈数</p>    
             <div>{{sumCu1}}</div>
         </div>
         <div id="sumDead" class = "panel">
-            <p>新增地区累计死亡数</p>
+            <p>累计死亡数</p>
             <div>{{sumD1}}</div>
         </div>
     </div>
@@ -43,7 +43,7 @@
     <div id="timebox" ></div>
     <div id=container>
         <div id = "tbhead">
-        <p id ='tbP'><img id ="tableLogo" src="https://cdn.jsdelivr.net/gh/zjtd/corona2019-map@v0.0.4/img/表格1.png" alt="tableLogo">国内新增患者城市疫情信息统计</p>
+        <p id ='tbP'><img id ="tableLogo" src="https://cdn.jsdelivr.net/gh/zjtd/corona2019-map@v0.0.7/img/表格1.png" alt="tableLogo">国内新增患者城市疫情信息统计</p>
         </div>
         <div id="tableBox" >
              <div id = "tablebox">
@@ -72,8 +72,9 @@
         </div>
     </div>
     </div>
-    <div id = "introduction">后续更新数据说明，项目地址……</div>
-    <script src="https://cdn.jsdelivr.net/gh/zjtd/corona2019-map@v0.0.6/index.js"></script>
+    <div id = "introduction">News：更新01-地图放大增加聚类统计图，常规数据更新</div>
+    <script src="https://cdn.jsdelivr.net/gh/zjtd/corona2019-map@v0.0.7/index.js"></script>
+    
     
 </body>
 
