@@ -297,6 +297,7 @@ td{
                 border-radius: 5px;
         }
         #dataPanelEchart1{
+
             position: absolute;
             left: 0px;
             top: 62.7em;
@@ -306,7 +307,8 @@ td{
             height:340px;
             border-radius: 5px;
             border: 1px solid #7a7e84;
-            width:100%;  
+            width:100%; 
+             
         }
         #dataPanelEchart2{
             position: absolute;

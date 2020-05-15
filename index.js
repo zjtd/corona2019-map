@@ -2,33 +2,42 @@ var obj2;
 var list = [];
 var list2 = [];
 var toObj = Object();
-var sumC =0,sumCu=0,sumD=0;;
-mapboxgl.accessToken = 'pk.eyJ1Ijoiemh1d2VubG9uZyIsImEiOiJjazdhNGF6dzIwd3V0M21zNHU1ejZ1a3Q4In0.VkUeaPhu-uMepNBOMc_UdA';
+var sumC =0,sumCu=0,sumD=0;
+mapboxgl.accessToken = 'pk.eyJ1IjoibHVrYXNtYXJ0aW5lbGxpIiwiYSI6ImNpem85dmhwazAyajIyd284dGxhN2VxYnYifQ.HQCmyhEXZUTz3S98FMrVAQ';
 map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/dark-v10', // stylesheet location
     center: [105.8,39.19],
-    maxZoom:11,
+    maxZoom:12,
     minZoom:1,
     zoom: 2.35,
     hash: true,
     maxzoom: 9,
-    defaultLanguage:'zh',
 });
+mapboxgl.setRTLTextPlugin('https://cdn.jsdelivr.net/npm/@mapbox/mapbox-gl-rtl-text@0.2.3/index.min.js');
+map.addControl(new MapboxLanguage({
+  defaultLanguage: 'zh'
+}));
 map.on('load', function () {
+    
     function passsource(sourcename, filename1) {
         map.addSource(sourcename, {
             'type': 'geojson',
             'data': filename1,     
+            'cluster':true,
+            clusterRadius:50,
+            clusterProperties:{'cCC':["+",["get","cCC"]]}
         });
     }  
-    passsource('coronavirus', 'cityNew.geojson');  
+    passsource('coronavirus', 'cityNew.geojson');
+    
     map.addLayer(
         {
             'id': 'coronavirus-heat',
             'type': 'heatmap',
             'source': 'coronavirus',
-            'maxzoom': 10,
+            'maxzoom': 6.9,
+            defaultLanguage: 'zh',
             'paint': {
                 // 热力权重，适用于集合图
                 // Mapbox Expression https://docs.mapbox.com/mapbox-gl-js/style-spec/expressions/
@@ -87,7 +96,53 @@ map.on('load', function () {
             }
         },
         'waterway-label'
-    );  
+    );
+    map.addLayer(
+        {
+            id: 'clusters-layer',
+            type: 'circle',
+            source: 'coronavirus',
+            'minzoom':6.99,
+            filter: ['>=', ['get', 'cCC'], 1],
+            paint: {
+                'circle-radius': [
+                    'step',
+                    ['get', 'cCC'],
+                    10, 10,
+                    20, 1000,
+                    30, 5000,
+                    40
+                ],
+                'circle-color': [
+                    'step',
+                    ['get', 'cCC'],
+                    '#9ad5ff', 10,
+                    '#9af6ff', 1000,
+                    'cyan', 2000,
+                    '#f1f075'
+                ],
+                'circle-translate':[-25,-25],
+            },
+
+        },
+        'waterway-label'
+    );
+
+    map.addLayer({
+        id: 'clusters-count',
+        type: 'symbol',
+        'minzoom':6.99,
+        source: 'coronavirus',
+        filter: ['>=', ['get', 'cCC'], 1],
+        layout: {
+            'text-field': '{cCC}',
+            'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
+            'text-size':32,
+            'text-allow-overlap': true,
+            'text-offset':[-0.8,-0.8]
+            
+        }
+    }, 'waterway-label');
 });
 
 function timeplay(){

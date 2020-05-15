@@ -5,14 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
     <title>疫情图</title>
-    <script src="https://cdn.jsdelivr.net/gh/zjtd/corona2019-map@v0.0.4/data/data.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/zjtd/corona2019-map@v0.0.4/data/Chinadata.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/zjtd/corona2019-map@v0.0.4/data/foreign.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/zjtd/corona2019-map@v0.0.6/data/data.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/zjtd/corona2019-map@v0.0.6/data/Chinadata.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/zjtd/corona2019-map@v0.0.6/data/foreign.js"></script>
+    <script src='https://cdn.jsdelivr.net/npm/@mapbox/mapbox-gl-language@0.10.1/index.js'></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mapbox-gl@1.10.0/src/css/mapbox-gl.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zjtd/corona2019-map@v0.0.4/webcss.css">
     <script src="https://cdn.jsdelivr.net/npm/mapbox-gl@1.10.0/dist/mapbox-gl.min.js"></script>
-    <script src='https://cdn.jsdelivr.net/gh/zjtd/corona2019-map@v0.0.4/TimePlayer.js'></script>
+    <script src='https://cdn.jsdelivr.net/gh/zjtd/corona2019-map@v0.0.6/TimePlayer.js'></script>
     <script src="https://cdn.jsdelivr.net/npm/echarts@4.7.0/dist/echarts.min.js"></script>
+    
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     
 </head>
@@ -46,7 +48,7 @@
         <div id="tableBox" >
              <div id = "tablebox">
             <div id="rTable">
-                <table id="tableID" onclick = "test123(event)">
+                <table id="tableID">
                     
                     <tr>
                         <th v-for="th in tableTh" >
@@ -71,7 +73,8 @@
     </div>
     </div>
     <div id = "introduction">后续更新数据说明，项目地址……</div>
-    <script src="https://cdn.jsdelivr.net/gh/zjtd/corona2019-map@v0.0.5/heatmap_1.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/zjtd/corona2019-map@v0.0.6/index.js"></script>
+    
 </body>
 
 
