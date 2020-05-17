@@ -1,31 +1,23 @@
-var obj2;
-var list = [];
-var list2 = [];
-var toObj = Object();
-var sumC =0,sumCu=0,sumD=0;
+
 mapboxgl.accessToken = 'pk.eyJ1IjoibHVrYXNtYXJ0aW5lbGxpIiwiYSI6ImNpem85dmhwazAyajIyd284dGxhN2VxYnYifQ.HQCmyhEXZUTz3S98FMrVAQ';
 map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/dark-v10', // stylesheet location
-    center: [105.8,39.19],
+    center: [103.22,36.48],
     maxZoom:12,
     minZoom:1,
-    zoom: 2.35,
+    zoom: 2.5,
     hash: true,
     maxzoom: 9,
 });
-mapboxgl.setRTLTextPlugin('https://cdn.jsdelivr.net/npm/@mapbox/mapbox-gl-rtl-text@0.2.3/index.min.js');
-map.addControl(new MapboxLanguage({
-  defaultLanguage: 'zh'
-}));
 map.on('load', function () {
     map.addSource('coronavirus', {
         'type': 'geojson',
-        'data': 'cityNew.geojson',
+        'data': './data/cityNew.geojson',
     });
     map.addSource('coronavirus1', {
         'type': 'geojson',
-        'data': 'cityNew.geojson',     
+        'data': './data/cityNew.geojson',     
         'cluster':true,
         clusterRadius:50,
         clusterProperties:{'cCC':["+",["get","cCC"]]}
@@ -36,7 +28,6 @@ map.on('load', function () {
             'type': 'heatmap',
             'source': 'coronavirus',
             'maxzoom': 6.9,
-            defaultLanguage: 'zh',
             'paint': {
                 // 热力权重，适用于集合图
                 // Mapbox Expression https://docs.mapbox.com/mapbox-gl-js/style-spec/expressions/
@@ -143,60 +134,20 @@ map.on('load', function () {
         }
     }, 'waterway-label');
 });
-
-function timeplay(){
-const dom = document.getElementById("timebox");
-    // 创建数据 
-
-    const dates = [];
-    const now = new Date();
-    now.setDate(-151);
-    for (var i = 0; i < 166; i++) {
-        const str = `${now.getFullYear()}/${now.getMonth() + 1}/${now.getDate()}`;
-        dates.push(str);
-        now.setDate(now.getDate() + 1);
-    };
-    
-    // 初始化
-    tp = new Timeplayer(dom, {
-        dates,
-        postSpace: 15,
-        theme: 'dark',
-    });};
-timeplay()
-
-function passsource(sourcename, filename1 = toObj) {
-
-    map.addSource(sourcename, {
-        'type': 'geojson',
-        'data': filename1,
-        
-    });
-
-};
-var dateUnique = [];
-function unique2(arr){
-    var hash=[];
-    for (var i = 0; i < arr.length; i++) {
-       if(arr.indexOf(arr[i])===i){
-        hash.push(arr[i]);
-       }
-    }
-
-    return hash;
-};
 var tempArray;
-var dateList = [];
-function dataListOnce(var1="2020/5/14") {
+var obj2;
+var list = [];
+var list2 = [];
+var toObj = Object();
+var sumC =0,sumCu=0,sumD=0;
+function dataListOnce(var1="2020/5/17") {
     list = [];
     list2= [];
     sumC=0,sumcoC=0,sumCu=0,sumD =0,sumS =0,sumcCC=0;
-
     toObj.type = "FeatureCollection";
     obj2 = api.features;
     for (i = 0; i < obj2.length; i++) {
         array1 =Object.assign({}, obj2[i]);
-        dateList.push(array1.properties.uT);
         if (array1.properties.uT == var1) {
             var tempArray =JSON.parse(JSON.stringify(array1));
             delete(tempArray.properties.uT);
@@ -210,12 +161,18 @@ function dataListOnce(var1="2020/5/14") {
         };
     sumC=sumcCC;
 };
-
 dataListOnce();
-
-dateUnique = unique2(dateList);
-dateUnique.sort();
-
+function timeplay(){
+const dom = document.getElementById("timebox");
+    // 创建数据 
+    const dates = ["2020/2/25", "2020/2/26", "2020/2/27", "2020/2/28", "2020/2/29", "2020/3/1", "2020/3/2", "2020/3/3", "2020/3/4", "2020/3/5", "2020/3/6", "2020/3/7", "2020/3/8", "2020/3/9", "2020/3/10", "2020/3/11", "2020/3/12", "2020/3/13", "2020/3/14", "2020/3/15", "2020/3/16", "2020/3/17", "2020/3/18", "2020/3/19", "2020/3/20", "2020/3/21", "2020/3/22", "2020/3/23", "2020/3/24", "2020/3/25", "2020/3/26", "2020/3/27", "2020/3/28", "2020/3/29", "2020/3/30", "2020/3/31", "2020/4/1", "2020/4/2", "2020/4/3", "2020/4/4", "2020/4/5", "2020/4/6", "2020/4/7", "2020/4/8", "2020/4/9", "2020/4/10", "2020/4/11", "2020/4/12", "2020/4/13", "2020/4/14", "2020/4/15", "2020/4/16", "2020/4/17", "2020/4/18", "2020/4/19", "2020/4/20", "2020/4/21", "2020/4/22", "2020/4/23", "2020/4/24", "2020/4/25", "2020/4/26", "2020/4/27", "2020/4/28", "2020/4/29", "2020/4/30", "2020/5/1", "2020/5/2", "2020/5/3", "2020/5/4", "2020/5/5", "2020/5/6", "2020/5/7", "2020/5/8", "2020/5/9", "2020/5/10", "2020/5/11", "2020/5/12", "2020/5/13", "2020/5/14", "2020/5/15", "2020/5/16", "2020/5/17"];
+    // 初始化
+    tp = new Timeplayer(dom, {
+        dates,
+        postSpace: 15,
+        theme: 'dark',
+    });};
+timeplay()
 var app1 = new Vue({
     el: '#rTable',
     data: {
@@ -281,7 +238,7 @@ const test = (index,value) =>{
         list2= [];
         obj2 = api.features;
         toObj.type = "FeatureCollection";
-        sumC=0,sumcoC=0,sumCu=0,sumD =0,sumS =0,sumcCC=0;
+        sumC=0,sumcoC=0,sumCu=0,sumD =0,sumcCC=0;
         for (i = 0; i < obj2.length; i++) {
              // var obj3 = obj2;
              array1 = Object.assign({}, obj2[i]);
@@ -289,11 +246,9 @@ const test = (index,value) =>{
                 var tempArray =JSON.parse(JSON.stringify(array1));
                 delete(tempArray.properties.uT)
                 tempArray.type = "Feature";
-                var num1 = tempArray.properties.coC
                 sumcoC +=parseInt(tempArray.properties.coC);
                 sumCu +=tempArray.properties.cuC;
                 sumD +=parseInt(tempArray.properties.dC);
-                sumS +=parseInt(tempArray.properties.sC);
                 tempArray.properties.cCC = tempArray.properties.coC-tempArray.properties.cuC-tempArray.properties.dC
                 list.push(tempArray);
                 sumcCC +=parseInt(tempArray.properties.cCC);
@@ -308,6 +263,7 @@ const test = (index,value) =>{
         panel.sumC1 = sumC;
         panel.sumCu1 =sumCu;
         panel.sumD1 = sumD; 
+        // 清除vue 组件app1中的数据
         var dLL = app1.dataList.length;
         app1.dataList.splice(0,dLL);
         map.removeLayer('coronavirus-heat');
@@ -455,13 +411,11 @@ const test = (index,value) =>{
 		tableID.appendChild(tablemessage);
         tablemessage.textContent = "请减少日期选择速度"
     };
-    
     };
 tp.on("change",test);
 function pantoMap(e){
     alert(e.target.innerText);
 };
-
 function getChinaData(){
     var tempList= [];
     ChinaCCC = [];
@@ -481,11 +435,11 @@ getChinaData();
 function getForeignData(){
     fDDates = [];
     for(i=0;i<foreign.length;i++){
-        if(foreign[i].countryCode=='JP'){
+        if(foreign[i].countryCode=='ES'){
             fDDates.push(foreign[i].date)
         }
     };
-    FR=[];DE=[];JP=[];US=[];IT=[];GB=[];
+    FR=[];DE=[];JP=[];US=[];IT=[];GB=[];ES=[];RU=[];
     for(j=0;j<foreign.length;j++){
             if(foreign[j].country =="法国"){
                 FR.push(foreign[j].confirmed)
@@ -504,9 +458,15 @@ function getForeignData(){
             }
             else if(foreign[j].countryCode =='GB'){
                 GB.push(foreign[j].confirmed)
-            };
+            }
+            else if(foreign[j].country =='俄罗斯'){
+                RU.push(foreign[j].confirmed)
+            }
+            else if(foreign[j].country =='西班牙'){
+                ES.push(foreign[j].confirmed)
+            }
     };
-    length1 = FR.length
+    length1 = ES.length
     for(i=0;i<fDDates.length-length1;i++){
         FR.unshift(0)
         };
@@ -617,9 +577,19 @@ var fCOption = {
             data: FR,
         },
         {
+            name: '俄罗斯', // 系列名称
+            type: 'line', // 类型：线
+            data: RU,
+        },
+        {
             name: '德国', // 系列名称
             type: 'line', // 类型：线
             data: DE,
+        },
+        {
+            name: '西班牙', // 系列名称
+            type: 'line', // 类型：线
+            data: ES,
         },
         {
             name: '英国', // 系列名称
@@ -637,7 +607,6 @@ var fCOption = {
             data: US,
         },
     ]
-    
 };
 var dCOption ={
     title:{
